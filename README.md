@@ -14,7 +14,7 @@ This library makes connecting to the bytespace interfaces easier.
 ### Database Interface
 
 ```py
-from bytespace.interfaces import DatabaseInterface
+from bytespace.DatabaseInterface import DatabaseInterface
 
 interface = DatabaseInterface()
 token = interface.connect(key, username, password)
@@ -23,7 +23,7 @@ token = interface.connect(key, username, password)
 ### Auth Interface
 
 ```py
-from bytespace.interfaces import AuthInterface
+from bytespace.DatabaseInterface import AuthInterface
 
 interface = AuthInterface()
 interface.connect(key, token)
@@ -32,15 +32,16 @@ interface.connect(key, token)
 ### Application Interface
 
 ```py
-from bytespace.interfaces import ApplicationInterface
+from bytespace.DatabaseInterface import ApplicationInterface
 
 interface = ApplicationInterface()
 interface.connect(key, token)
 ```
 
 ### APITest Interface
+
 ```py
-from bytespace.interfaces import APITest
+from bytespace.DatabaseInterface import APITest
 
 interface = APITest()
 interface.connect(...)
