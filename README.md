@@ -32,7 +32,7 @@ interface.connect(key, token)
 ### Application Interface
 
 ```py
-from bytespace.interfaces import AuthInterface
+from bytespace.interfaces import ApplicationInterface
 
 interface = ApplicationInterface()
 interface.connect(key, token)
@@ -43,7 +43,7 @@ interface.connect(key, token)
 from bytespace.interfaces import APITest
 
 interface = APITest()
-interface.connect(key, token, ...)
+interface.connect(...)
 ```
 
 ## Changing aspects of the interface
@@ -58,12 +58,27 @@ interface.connect(key, token, ...)
 
 ### Images/icons
 
+```py
+from bytespace.res import ResourceManager
+
+rm = ResounceManager()
+filenames = rm.scan("regex", resource=ICONS)
+rm.download(filenames[0])
+```
+
 ### CSS/JS files
+```py
+from bytespace.res import ResourceManager
+
+rm = ResounceManager()
+filenames = rm.scan("regex", resource=CSS)
+rm.download(filenames[0])
+```
 
 ## Exceptions
 
 ## Cache
-
+Internal library cache keeps track of certain request/response pairs, detects when the same parameters are being used, and then instantly delivers the prior response. This is only enabled with certain interfaces, and can be disabled by the user. 
 
 ## Contributors 
 
