@@ -14,7 +14,7 @@ This library makes connecting to the bytespace interfaces easier.
 ### Database Interface
 
 ```py
-from bytespace.DatabaseInterface import DatabaseInterface
+from bytespace.interfaces import DatabaseInterface
 
 interface = DatabaseInterface()
 token = interface.connect(key, username, password)
@@ -23,7 +23,7 @@ token = interface.connect(key, username, password)
 ### Auth Interface
 
 ```py
-from bytespace.DatabaseInterface import AuthInterface
+from bytespace.interfaces import AuthInterface
 
 interface = AuthInterface()
 interface.connect(key, token)
@@ -32,7 +32,7 @@ interface.connect(key, token)
 ### Application Interface
 
 ```py
-from bytespace.DatabaseInterface import ApplicationInterface
+from bytespace.interfaces import ApplicationInterface
 
 interface = ApplicationInterface()
 interface.connect(key, token)
@@ -41,7 +41,7 @@ interface.connect(key, token)
 ### APITest Interface
 
 ```py
-from bytespace.DatabaseInterface import APITest
+from bytespace.interfaces import APITest
 
 interface = APITest()
 interface.connect(...)
@@ -49,11 +49,47 @@ interface.connect(...)
 
 ## Changing aspects of the interface
 
-### Interface class
-
 ### Changing domain, protocol, etc
+The domain, protocol, and directory are attributes of the interface class.
+These attributes are used to build the urls before making a connection to the server.
+So, we modify these attributes, the url built will change.
+This was created for flexibility as you can modify the domain of where you want to connect to.
+This means if bytespace ever changes domain, you can change this and the library will continue to work.
+
+This allows you to modify where, and how, the interfere makes connections to.
+```py
+from bytespace.interfaces import AuthInterface
+
+interface = AuthInterface()
+print(interface.protocol)
+print(interface.domain)
+print(interface.directory)
+```
+This code creates an `AuthInterface` and prints out all the attributes that makes up the domain built by `AuthInterface`.
+```
+https
+bytespace.network
+Intefaces
+```
+We can change these by modifying them directly.
+```py
+from bytespace.interfaces import AuthInterface
+
+interface = AuthInterface()
+interface.protocol = "http"
+interface.domain = "example.com"
+interface.directory = "api"
+```
+This switches the doamin to `http://example.com/api`. 
+This means the `AuthInterface` will connect to `example.com` instead of `bytespace.network`.
+
+Every interface also has the attribute `name` which is the name of the interface they are connecting to.
+For AuthDatabase, this attribute is set to `"AuthInterface.php"`.
+You can also modify this, althought it is not recommended.
 
 ### Changing interface specific properties
+
+### Interface class
 
 ## Resource download manager
 
