@@ -4,14 +4,27 @@ import requests
 
 
 class DatabaseInterface(Interface):
+    """
+    DatabaseInterface:
+    Makes connections to the bytespace server (bytespace.network) api interfaces.
+
+    Pass the key with DatabaseInterface initialisation.
+    Use the `connect()` method to connect to the DatabaseInterface.
+    """
+
     def __init__(self, key):
         super().__init__(key)
         self.name = "DatabaseInterface"
         self.url = self.build_url(f"{self.name}.php")
 
-    def connect(self, username=None, password=None):
+    def connect(self, username=None, password=None, verify=True):
+        """
+        Makes a connection to the DatabaseInterface.
+        If the response is an error an appropriate exception will be raised.
+        Otherwise, a login token is returned.
 
-        # Making the connection
+        Automatic verification of login token is conducted via AuthInterface.
+        """
         data = {"appID": self._key}
 
         if username is not None:
@@ -36,7 +49,15 @@ class DatabaseInterface(Interface):
             else:
                 raise BaseInterfaceException()
 
-        return res.text.replace("[SUCCESS]", "")
+        token = res.text.replace("[SUCCESS]", "")
+
+        if verify:
+            if AuthInterface(self._key).verify(token=token):
+                return token
+            else:
+                raise InvalidTokenError
+
+        return token
 
 
 class AuthInterface(Interface):
@@ -96,13 +117,3 @@ class ApplicationInterface(Interface):
                 raise BaseInterfaceException()
 
         return res.text.replace("[SUCCESS]", "")
-
-
-
-
-
-
-
-
-
-
