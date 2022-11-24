@@ -98,11 +98,6 @@ class ApplicationInterface(Interface):
         return res.text.replace("[SUCCESS]", "")
 
 
-class APITest(Interface):
-    def __init__(self, key):
-        super().__init__(key)
-        self.name = "APITest"
-        self.url = self.build_url(f"{self.name}.php")
 
 
 
