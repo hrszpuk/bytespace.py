@@ -33,3 +33,8 @@ class MissingPasswordParameterError(BaseInterfaceException):
 class MissingUsernameParameterError(BaseInterfaceException):
     def __init__(self, message="Interface requires a username parameter that was not supplied!"):
         super().__init__(message)
+
+
+class InvalidTokenError(BaseInterfaceException):
+    def __init__(self, message="Application ID provided does not belong to a valid bytespace application!"):
+        super().__init__(message)
