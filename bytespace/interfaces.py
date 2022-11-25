@@ -61,6 +61,7 @@ class DatabaseInterface(Interface):
 
 
 class AuthInterface(Interface):
+
     def __init__(self, key):
         super().__init__(key)
         self.name = "AuthInterface"
@@ -117,3 +118,4 @@ class ApplicationInterface(Interface):
                 raise BaseInterfaceException()
 
         return res.text.replace("[SUCCESS]", "")
+
