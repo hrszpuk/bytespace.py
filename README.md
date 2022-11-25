@@ -5,9 +5,8 @@ This library makes connecting to the bytespace interfaces easier.
 ### Features
 - Interface management 
 - Custom Exceptions
-- Request/Response cache
 - Automatic token verification
-- Resource download manager
+- Simple, fast, and easy to understand
 
 ## Interfaces
 
@@ -17,8 +16,8 @@ You can use the login token returned to get the unique user id which can be used
 ```py
 from bytespace.interfaces import DatabaseInterface
 
-interface = DatabaseInterface()
-token = interface.connect(key, username, password)
+interface = DatabaseInterface(key="a5b98043-64f8-41cc-92c2-6da6fc4ff056")
+token = interface.connect(username="username", password="password")
 ```
 If anything information you provide is incorrect an exception will be raised.
 The most notable exceptions are `InvalidAppIDError` and `MissingParameterError`.
@@ -32,8 +31,8 @@ or perhaps enough time has elapsed that verifying whether the token is still val
 ```py
 from bytespace.interfaces import AuthInterface
 
-interface = AuthInterface()
-interface.connect(key, token)
+interface = AuthInterface(key="a5b98043-64f8-41cc-92c2-6da6fc4ff056")
+interface.verify(token)
 ```
 
 ### Application Interface
@@ -43,19 +42,8 @@ You are required to give the interface your `appID` (called key here) and `token
 ```py
 from bytespace.interfaces import ApplicationInterface
 
-interface = ApplicationInterface()
-interface.connect(key, token)
-```
-
-### APITest Interface
-This interface is purely for testing the api. 
-All arguments passed into this function are embedded into the url.
-For POST requests, you must provide a `data` argument that must be a dictionary.
-```py
-from bytespace.interfaces import APITest
-
-interface = APITest()
-interface.connect("test", data={"message": "hello"})
+interface = ApplicationInterface(key="a5b98043-64f8-41cc-92c2-6da6fc4ff056")
+interface.connect(token)
 ```
 
 ## Changing aspects of the interface
@@ -67,11 +55,11 @@ So, we modify these attributes, the url built will change.
 This was created for flexibility as you can modify the domain of where you want to connect to.
 This means if bytespace ever changes domain, you can change this and the library will continue to work.
 
-This allows you to modify where, and how, the interfere makes connections to.
+This allows you to modify where, and how, the interface makes connections to.
 ```py
 from bytespace.interfaces import AuthInterface
 
-interface = AuthInterface()
+interface = AuthInterface(key="a5b98043-64f8-41cc-92c2-6da6fc4ff056")
 print(interface.protocol)
 print(interface.domain)
 print(interface.directory)
@@ -95,38 +83,15 @@ This switches the doamin to `http://example.com/api`.
 This means the `AuthInterface` will connect to `example.com` instead of `bytespace.network`.
 
 Every interface also has the attribute `name` which is the name of the interface they are connecting to.
-For AuthDatabase, this attribute is set to `"AuthInterface.php"`.
+For AuthDatabase, this attribute is set to `"AuthInterface"`.
 You can also modify this, although it is not recommended.
 
-### Changing interface specific properties
+## Contributors
+Contributing helps keep this library safe and up to date. 
+If you want to help, why not create an issue?
 
-### Interface class
+<a href="https://github.com/hrszpuk/bytespace.py/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=hrszpuk/bytespace.py" />
+</a>
 
-## Resource download manager
-
-### Images/icons
-
-```py
-from bytespace.res import ResourceManager
-
-rm = ResounceManager()
-filenames = rm.scan("regex", resource=ICONS)
-rm.download(filenames[0])
-```
-
-### CSS/JS files
-```py
-from bytespace.res import ResourceManager
-
-rm = ResounceManager()
-filenames = rm.scan("regex", resource=CSS)
-rm.download(filenames[0])
-```
-
-## Exceptions
-
-## Cache
-Internal library cache keeps track of certain request/response pairs, detects when the same parameters are being used, and then instantly delivers the prior response. This is only enabled with certain interfaces, and can be disabled by the user. 
-
-## Contributors 
 
