@@ -40,3 +40,22 @@ def test_bytespace_connection():
     assert requests.get(interface.build_url()).status_code == 200
 
 
+def test_database_interface_parameters_username():
+    pass
+
+
+def test_database_interface_parameters_password():
+    pass
+
+
+def test_database_interface_parameters_key():
+    pass
+
+
+def test_database_interface_valid():
+    pass
+
+
+
+
+

@@ -61,6 +61,11 @@ class DatabaseInterface(Interface):
 
 
 class AuthInterface(Interface):
+    """
+    This interface is used to validate a login token.
+    This interface is used automatically by the DatabaseInterface,
+     so you do not need to verify your tokens when fetching them in this method.
+    """
 
     def __init__(self, key):
         super().__init__(key)
@@ -90,6 +95,10 @@ class AuthInterface(Interface):
 
 
 class ApplicationInterface(Interface):
+    """
+    The application interface is used for getting user information from bytespace servers.
+    By default, this interface get the user's unique id.
+    """
     def __init__(self, key):
         super().__init__(key)
         self.name = "ApplicationInterface"

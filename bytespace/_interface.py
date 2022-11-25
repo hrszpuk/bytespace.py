@@ -1,6 +1,11 @@
 
 
 class Interface:
+    """
+    Base class for all interfaces.
+    This class just contains some common properties/attributes used by each interface.
+    This also allows you to define your own interfaces (if bytespace ever gets any new ones).
+    """
     def __init__(self, key=None):
         self.domain = "bytespace.network"
         self.protocol = "https"

@@ -36,5 +36,5 @@ class MissingUsernameParameterError(BaseInterfaceException):
 
 
 class InvalidTokenError(BaseInterfaceException):
-    def __init__(self, message="Application ID provided does not belong to a valid bytespace application!"):
+    def __init__(self, message="The token given, or returned, is invalid!"):
         super().__init__(message)
