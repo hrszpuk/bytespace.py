@@ -2,10 +2,13 @@
 Bytespace (https://bytespace.network/) API library in Python.
 This library makes connecting to the bytespace interfaces easier.
 
+..for more information check out the [documentation](docs)!
+
 ### Features
 - Interface management 
 - Custom Exceptions
 - Automatic token verification
+- [WIP] Logging support
 - Simple, fast, and easy to understand
 
 ## Contributors
