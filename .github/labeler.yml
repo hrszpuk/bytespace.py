@@ -1,19 +1,19 @@
-Repository:
-  - any: [".github/*"]
-  - any: [".github/**/*"]
+Interface:
+  - any: ["bytespace/_interface.py"]
 
-Go:
-  - any: ["*.go", "*/*.go", "*/**/*.go"]
+Testing:
+  - any: ["tests/*.py"]
 
-Asset:
-  - any: ["*.png"]
-  - any: ["*.jpg"]
-  - any: ["*.pdf"]
+PIP related:
+  - any: ["setup.py", "requirements.txt"]
 
-Documentation:
-  - any: ["README.md"]
-  - any: ["*/README.md"]
+documentation:
+  - any: ["*.md"]
+  - any: ["*/*.md"]
+  - any: ["docs/*"]
 
-Dependencies:
-  - any: ["go.mod"]
-  - any: ["go.sum"]
+GitHub related:
+  - any: [".github/*", ".github/**/*"]
+
+Exceptions:
+  - any: ["bytespace/exceptions.py"]
