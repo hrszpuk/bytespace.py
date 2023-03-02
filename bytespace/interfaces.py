@@ -106,12 +106,15 @@ class ApplicationInterface(Interface):
         self.mode = "READUNIQUE"
         self.url = self.build_url(f"{self.name}.php")
 
-    def connect(self, token=None):
+    def connect(self, token=None, head="unique", mode="READUNIQUE"):
 
         data = {"appID": self._key}
 
         if token is not None:
             data["token"] = token
+
+        data["head"] = head
+        data["mode"] = mode
 
         res = requests.post(self.url, data=data)
 
