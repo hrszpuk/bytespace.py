@@ -1,8 +1,5 @@
-# bytespace.py
-Bytespace (https://bytespace.network/) API library in Python.
-This library makes connecting to the bytespace interfaces easier.
-
-..for more information check out the [documentation](docs)!
+<h1 align="center">ByteSpace Interface API</h1>
+<p align="center">A lightweight library for connecting to the ByteSpace (https://bytespace.network) Interface API written in Python. For more information check out the [documentation](docs)!</p>
 
 <p align="center">
 <a href="./LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-BLUE.svg"></a>
