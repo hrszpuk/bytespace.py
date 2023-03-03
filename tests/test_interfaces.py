@@ -1,6 +1,6 @@
 # Bytespace imports
+from bytespace.interface import Interface
 from bytespace.interfaces import DatabaseInterface
-from bytespace._interface import Interface
 from bytespace.exceptions import *
 
 # Testing imports
