@@ -24,4 +24,11 @@ If you want to help, why not create an issue?
   <img src="https://contrib.rocks/image?repo=hrszpuk/bytespace.py" />
 </a>
 
+| Title     | Save extra money for her toddler, as child-care is becoming more expensive                                                                                                        |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Actor     | Karppov                                                                                                                                                                           |
+| Rationale | Many people will need to use this app to help cope with the cost-of-living crisis which involves focusing their spending better on important things.                              |
+| Detail    | 1. They open the app.<br>2. ahfaejsljflksd                                                                                                                                        |
+| Notes     | The details above make the assumption this user is using the app on payday. This means their expenditure for this month is £0 currently, and the balance is their monthly salary. |
+
 
