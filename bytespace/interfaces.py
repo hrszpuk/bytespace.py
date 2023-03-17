@@ -1,6 +1,8 @@
-from bytespace._interface import Interface
-from bytespace.exceptions import *
+import logging
 import requests
+
+from bytespace.exceptions import *
+from bytespace.interface import Interface
 
 
 class DatabaseInterface(Interface):
@@ -11,11 +13,13 @@ class DatabaseInterface(Interface):
     Pass the key with DatabaseInterface initialisation.
     Use the `connect()` method to connect to the DatabaseInterface.
     """
+    count = 0
 
     def __init__(self, key):
         super().__init__(key)
         self.name = "DatabaseInterface"
         self.url = self.build_url(f"{self.name}.php")
+        logging.debug(f"{self.name}: Created object (count = {DatabaseInterface.count})")
 
     def connect(self, username=None, password=None, verify=True):
         """
@@ -29,9 +33,12 @@ class DatabaseInterface(Interface):
 
         if username is not None:
             data["username"] = username
+        else:
+            logging.warning(f"{self.name}: With username=None connection attempt could fail")
 
         if password is not None:
             data["password"] = password
+        logging.warning(f"{self.name}: With password=None connection attempt could fail")
 
         res = requests.post(self.url, data=data)
 
@@ -59,6 +66,9 @@ class DatabaseInterface(Interface):
 
         return token
 
+    def __del__(self):
+        logging.debug(f"{self.name}: Deleted object (count = {DatabaseInterface.count})")
+
 
 class AuthInterface(Interface):
     """
@@ -66,11 +76,13 @@ class AuthInterface(Interface):
     This interface is used automatically by the DatabaseInterface,
      so you do not need to verify your tokens when fetching them in this method.
     """
+    count = 0
 
     def __init__(self, key):
         super().__init__(key)
         self.name = "AuthInterface"
         self.url = self.build_url(f"{self.name}.php")
+        logging.debug(f"{self.name}: Created object (count = {AuthInterface.count})")
 
     def connect(self, token=None):
 
@@ -78,6 +90,8 @@ class AuthInterface(Interface):
 
         if token is not None:
             data["token"] = token
+        else:
+            logging.warning(f"{self.name}: With token=None connection attempt could fail")
 
         res = requests.post(self.url, data=data)
 
@@ -93,18 +107,24 @@ class AuthInterface(Interface):
         else:
             return True
 
+    def __del__(self):
+        logging.debug(f"{self.name}: Deleted object (count = {AuthInterface.count})")
+
 
 class ApplicationInterface(Interface):
     """
     The application interface is used for getting user information from bytespace servers.
     By default, this interface get the user's unique id.
     """
+    count = 0
+
     def __init__(self, key):
         super().__init__(key)
         self.name = "ApplicationInterface"
         self.head = "unique"
         self.mode = "READUNIQUE"
         self.url = self.build_url(f"{self.name}.php")
+        logging.debug(f"{self.name}: Created object (count = {ApplicationInterface.count})")
 
     def connect(self, token=None, head="unique", mode="READUNIQUE"):
 
@@ -112,6 +132,8 @@ class ApplicationInterface(Interface):
 
         if token is not None:
             data["token"] = token
+        else:
+            logging.warning(f"{self.name}: With token=None connection attempt could fail")
 
         data["head"] = head
         data["mode"] = mode
@@ -129,5 +151,9 @@ class ApplicationInterface(Interface):
             else:
                 raise BaseInterfaceException()
 
+        logging.debug(f"{self.name}: Connection successful with mode={mode} and head={head}")
         return res.text.replace("[SUCCESS]", "")
+
+    def __del__(self):
+        logging.debug(f"{self.name}: Deleted object (count = {ApplicationInterface.count})")
 
